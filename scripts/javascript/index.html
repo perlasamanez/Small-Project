@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<script type="text/javascript" src="contactScript.js"></script>
+        <title> Small Contacts </title>
+    </head>
+    
+        
+    <div id="outerLogin">
+        <div id="loginUI">
+                User Name: <input type="text" id="userName" placeholder="User Name" /><br />
+                Password: <input type="password" id="password" placeholder="Password" /><br />
+            <button type="button" id="login" onclick="doLogin();">Login</button><br /><br />
+        </div>
+    </div>
+        
+    <div id="searchAdd" style="display:none">
+        Add Contact:<br /> <input type="text" id="addContactName" placeholder="Contact Name" /><br />
+                     <input type="text" id="addContactPhone" placeholder="Contact Phone" /><br />
+                     <input type="text" id="addContactEmail" placeholder="Contact Email" /><br />
+        <button type="button" id="addBtn" onclick="addContact();">Add</button><br />
+        Search Contact:<br /> <input type="text" id="searchContact" placeholder="Contact Name" />
+        <button type="button" id="searchBtn" onclick="searchContact();">Search</button><br />
+    </div>
+        
+    <div id="conTab" ></div>
+    
+    <div id="logOut">
+        <br />
+        <button type="button" id="logout" onclick="Logout();" style="visibility: hidden">LogOut</button><br />
+    </div>
+        
+    
+    
+</html>
