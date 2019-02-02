@@ -31,6 +31,8 @@ function doLogin()
         document.getElementById("logout").style.visibility = 'visible';
 }
 
+function doRegister(){}
+
 function makeTable(){
     var conTab = document.getElementById("conTab");
     
