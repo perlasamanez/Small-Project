@@ -1,3 +1,3 @@
 # CONNECT
 
-![alt text](https://raw.githubusercontent.com/perlasamanez/Small-Project/images/connect-logo.png)
+![CONNECT](https://github.com/perlasamanez/Small-Project/blob/master/images/connect-logo.png)
