@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
   <head>
@@ -22,7 +23,9 @@
 
     <!-- Custom styles for this template-->
     <link href="css/dashboard.css" rel="stylesheet">
+    
 
+    
   </head>
 
   <body id="page-top">
@@ -70,7 +73,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Contacs</span>
+            <span>Contacts</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <!--h6 class="dropdown-header">Login Screens:</h6-->
@@ -98,43 +101,123 @@
               Manage your Contacts</div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+               <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <td>Contact ID</td>
                       <td>First Name</td>
                       <td>Last Name</td>
-                      <td>Email</td>
                       <td>Phone Number</td>
                     </tr>
                   </thead>
-                  <tbody>
-                    <?php
-                    $connect = mysql_connect("localhost","root", "root");           
-                    if (!$connect) {
-                        die(mysql_error());
-                    }
-                    mysql_select_db("apploymentdevs");
-                    $results = mysql_query("SELECT * FROM demo LIMIT 10");
-                    while($row = mysql_fetch_array($results)) {
-                    ?>
-                        <tr>
-                            <td><?php echo $row['Contact ID']?></td>
-                            <td><?php echo $row['First Name']?></td>
-                            <td><?php echo $row['Last Name']?></td>
-                            <td><?php echo $row['Email']?></td>
-                            <td><?php echo $row['Phone Number']?></td>
+                  <tbody> !-->
+            <button type="button" id="removeButton" class="buttons" onclick="deleteContact(deletable, document.cookie);"> Delete </button>
+                  <table id="example" class="table table-bordered" id="dataTable" width="100%" cellspacing="0"></table>
+                      <script>
+    //console.log(document.cookie);
+    var jsonPayload = '{"userID" : "'+ document.cookie +'"}';
+	var url = "http://poopspring2019.website/API/GetContacts.php";
+	var deletable;
+	var arr = [];
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type",   "application/json; charset=UTF");
+	try
+	{  
+	    xhr.onreadystatechange = function()   
+	{    
+	    if (this.readyState == 4 && this.status == 200)     
+	    {       
+	        //console.log(xhr.responseText);
+	        var jsonObject = JSON.parse( xhr.responseText );
+	        if(jsonObject.error == "")
+	        {
+	            arr = jsonObject.results;
+	            
+                $(document).ready(function() 
+                {
+                
+                
+                var table = $('#example').DataTable
+                    (   
+            {
+                            data: arr,
+                            columns: 
+                            [
+                                { title: "First Name" },
+                                { title: "Last Name" },
+                                { title: "Phone" },
+                    
+                            ]
+                        }
+                    );
+                    /*
+                    $('#example tbody').on('click', 'tr', function () {
+                        var data = table.row( this ).data();
+                        //alert( 'You clicked on '+data[1]+'\'s row' );
+                        table.row(this).addClass("selected");
+                    } )
+                    */
+                    ///////////
+                    
+                    
+                    
+                     $('#example tbody').on( 'click', 'tr', function () {            
+    if ( $(this).hasClass('selected') ) { 
+        $(this).removeClass('selected'); 
+        $(this).addClass('selected').css('color', 'black');
+        $(this).removeClass('selected'); 
+    } 
+    else {                 
+        table.$('tr.selected').removeClass('selected'); 
+        console.log(table.row( this ).data()[1]);
+        deletable = table.row( this ).data()[1];
+        $(this).addClass('selected').css('color', 'red');                
+    }  
 
-                        </tr>
-        
-                    <?php
-                    }
-                    ?>
+  });
+                    
+                    
+                    
+                    ////////
+                } ); 
+	            
+	        }
+
+          
+
+	        //console.log(arr.length);
+	    }
+	};  
+	xhr.send(jsonPayload);
+	//console.log(arr.length);
+	
+	    
+	}
+	catch(err)
+	{  
+	    alert(err.message);
+	}
+	
+	
+	
+
+                      </script>
                 </tbody>
             </table>
+            
+       <script>
+           
+           
+           
+       </script>
+            
+
+            
           </div>
         </div>
     </div>
+  
+
 
     <!--REFERENCE TO ADD THE SEARCH BAR FUNCTIONAL IN PHP AND SQL 
        https://owlcation.com/stem/Simple-search-PHP-MySQL-->
@@ -181,6 +264,9 @@
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
 
     <!--Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -194,7 +280,6 @@
 
     <!--Demo scripts for this page-->
     <script src="js/demo/datatables-demo.js"></script>
-
+    <script type="text/javascript" src="scripts/javascript/contactScript.js"></script>
   </body>
-
 </html>
